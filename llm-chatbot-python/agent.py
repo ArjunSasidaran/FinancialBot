@@ -44,11 +44,6 @@ def get_memory(session_id):
     return Neo4jChatMessageHistory(session_id=session_id, graph=graph)
 
 agent_prompt = PromptTemplate.from_template("""
-You are a movie expert providing information about movies.
-Be as helpful as possible and return as much information as possible.
-Do not answer any questions that do not relate to movies, actors or directors.
-
-Do not answer any questions using your pre-trained knowledge, only use the information provided in the context.
 
 TOOLS:
 ------
