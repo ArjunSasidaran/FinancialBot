@@ -15,7 +15,7 @@ from tools.cypher import cypher_qa
 
 chat_prompt = ChatPromptTemplate.from_messages(
     [
-        ("system", "You are a movie expert providing information about movies."),
+        ("system", "You are a company expert and provide information that's on 10k and 10q forms"),
         ("human", "{input}"),
     ]
 )
@@ -23,11 +23,6 @@ chat_prompt = ChatPromptTemplate.from_messages(
 movie_chat = chat_prompt | llm | StrOutputParser()
 
 tools = [
-    Tool.from_function(
-        name="General Chat",
-        description="For general movie chat not covered by other tools",
-        func=movie_chat.invoke,
-    ), 
     Tool.from_function(
         name="Movie Plot Search",  
         description="For when you need to find information about movies based on a plot",
@@ -45,12 +40,16 @@ def get_memory(session_id):
 
 agent_prompt = PromptTemplate.from_template("""
 
+You are a company expert and provide information that's on 10k and 10q forms. This information will be in a knowledge graph which you will query using cypher
+
 TOOLS:
 ------
 
 You have access to the following tools:
 
 {tools}
+
+For the case of our functionality, you should ALWAYS use a tool 
 
 To use a tool, please use the following format:
 
@@ -61,11 +60,10 @@ Action Input: the input to the action
 Observation: the result of the action
 ```
 
-When you have a response to say to the Human, or if you do not need to use a tool, you MUST use the format:
-
+If you are not able to answer the question using a tool, then use this format:
 ```
 Thought: Do I need to use a tool? No
-Final Answer: [your response here]
+Final Answer: I am only made to answer questions pertaining to information on annual and quarterly forms 
 ```
 
 Begin!

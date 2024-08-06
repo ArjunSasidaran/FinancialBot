@@ -7,17 +7,16 @@ from langchain.prompts.prompt import PromptTemplate
 from langchain_community.chains.graph_qa.cypher import GraphCypherQAChain
 
 CYPHER_GENERATION_TEMPLATE = """
-You are an expert Neo4j Developer translating user questions into Cypher to answer questions about movies and provide recommendations.
+You are an expert Neo4j Developer translating user questions into Cypher queries to answer questions and provide information on annual forms of different companies
 Convert the user's question based on the schema.
 
 Use only the provided relationship types and properties in the schema.
 Do not use any other relationship types or properties that are not provided.
 
 Do not return entire nodes or embedding properties.
+Do your best to understand what the user is asking for, and convert it into cypher code 
 
 Fine Tuning:
-
-For movie titles that begin with "The", move "the" to the end. For example "The 39 Steps" becomes "39 Steps, The" or "the matrix" becomes "Matrix, The".
 
 Example Cypher Statements:
 
