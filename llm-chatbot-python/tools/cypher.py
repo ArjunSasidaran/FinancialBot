@@ -7,7 +7,7 @@ from langchain.prompts.prompt import PromptTemplate
 from langchain_community.chains.graph_qa.cypher import GraphCypherQAChain
 
 CYPHER_GENERATION_TEMPLATE = """
-You are an expert Neo4j Developer translating user questions into Cypher queries to answer questions and provide information on annual forms of different companies
+You are an expert Neo4j Developer translating user questions into Cypher queries to answer questions and provide information on financial info for various companies
 Convert the user's question based on the schema.
 
 Use only the provided relationship types and properties in the schema.

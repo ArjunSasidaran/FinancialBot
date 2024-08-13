@@ -1,3 +1,5 @@
+'''
+
 import streamlit as st
 from llm import llm, embeddings
 from graph import graph
@@ -69,3 +71,5 @@ plot_retriever = create_retrieval_chain(
 def get_movie_plot(input):
     return plot_retriever.invoke({"input": input})
 # end::get_movie_plot[]
+
+'''
