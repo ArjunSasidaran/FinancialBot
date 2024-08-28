@@ -18,42 +18,29 @@ Do your best to understand what the user is asking for, and convert it into cyph
 
 Fine Tuning:
 
+Do not use a company's ticker, please use the full name. For example if someone asks for Apple use the name Apple not AAPL.
+
+Please capitalize the first letter in each word when asked about a metric. For example if I want to know about Apple's operating income, the name should be Operating Income. This doesnt apply to "of" and "and" and 'for'.
+
+Please recogonize if someone types an extra s by accident and it doesnt exist in the database remove the s and run the query again. For example, convert Gross Margins to just Gross Margin.
+
 Example Cypher Statements:
 
-1. To find who acted in a movie:
+1. To find out about a certain metric for a given year:
+
 ```
-MATCH (p:Person)-[r:ACTED_IN]->(m:Movie {{title: "Movie Title"}})
-RETURN p.name, r.role
+MATCH (c:Company)-[:HAS_TABLE]->(t:Table)-[:HAS_METRIC]->(m:Metric)
+WHERE m.name = '$metric'
+RETURN m.value'$year'
 ```
 
-2. To find who directed a movie:
+2. To find out about risk factors for a company:
 ```
-MATCH (p:Person)-[r:DIRECTED]->(m:Movie {{title: "Movie Title"}})
-RETURN p.name
+MATCH (c:Company)-[:HAS_TABLE]->(t:Table)-[:HAS_RISK]->(r:RiskFactorItem)
+RETURN r.title
+
 ```
 
-3. How to find how many degrees of separation there are between two people:
-```
-MATCH path = shortestPath(
-  (p1:Person {{name: "Actor 1"}})-[:ACTED_IN|DIRECTED*]-(p2:Person {{name: "Actor 2"}})
-)
-WITH path, p1, p2, relationships(path) AS rels
-RETURN
-  p1 {{ .name, .born, link:'https://www.themoviedb.org/person/'+ p1.tmdbId }} AS start,
-  p2 {{ .name, .born, link:'https://www.themoviedb.org/person/'+ p2.tmdbId }} AS end,
-  reduce(output = '', i in range(0, length(path)-1) |
-    output + CASE
-      WHEN i = 0 THEN
-       startNode(rels[i]).name + CASE WHEN type(rels[i]) = 'ACTED_IN' THEN ' played '+ rels[i].role +' in 'ELSE ' directed ' END + endNode(rels[i]).title
-       ELSE
-         ' with '+ startNode(rels[i]).name + ', who '+ CASE WHEN type(rels[i]) = 'ACTED_IN' THEN 'played '+ rels[i].role +' in '
-    ELSE 'directed '
-      END + endNode(rels[i]).title
-      END
-  ) AS pathBetweenPeople
-```
-
-Schema:
 {schema}
 
 Question:
@@ -67,5 +54,7 @@ cypher_qa = GraphCypherQAChain.from_llm(
     llm,
     graph=graph,
     verbose=True,
-    cypher_prompt=cypher_prompt
+    cypher_prompt=cypher_prompt,
+    use_function_response = True,
+    return_intermediate_steps = True
 )

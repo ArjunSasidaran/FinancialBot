@@ -55,10 +55,17 @@ Action Input: the input to the action
 Observation: the result of the action
 ```
 
+If you are able to answer the question using a tool, then output the final answer directly from the tool's result. There is no need for further actions.
+
+Use the following format to return the result:
+
+Final Answer: [tool's result]
+                                            
+
 If you are not able to answer the question using a tool, then use this format:
 ```
 Thought: Do I need to use a tool? No
-Final Answer: I am only made to answer questions pertaining to information on annual and quarterly forms 
+Final Answer: I am only made to answer questions pertaining to information on annual and quarterly forms. 
 ```
 
 Begin!
