@@ -18,11 +18,11 @@ Do your best to understand what the user is asking for, and convert it into cyph
 
 Fine Tuning:
 
-Do not use a company's ticker, please use the full name. For example if someone asks for Apple use the name Apple not AAPL.
+FOR ALL QUERIES, convert the sentence to lowercase. For example, if someone asked about Apple's Operating Income, the company name should be "apple" and the metric name should be "operating income".
 
-Please capitalize the first letter in each word when asked about a metric. For example if I want to know about Apple's operating income, the name should be Operating Income. This doesnt apply to "of" and "and" and 'for'.
+Do not use a company's ticker, please use the full name. For example if someone asks for Apple use the name apple not AAPL. Also do not use Apple Inc or anything similar.
 
-Please recogonize if someone types an extra s by accident and it doesnt exist in the database remove the s and run the query again. For example, convert Gross Margins to just Gross Margin.
+Please recogonize if someone types an extra s by accident and it doesnt exist in the database, remove the s and run the query again. For example, convert Gross Margins to just gross margin.
 
 Example Cypher Statements:
 

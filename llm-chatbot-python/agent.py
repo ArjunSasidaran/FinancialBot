@@ -61,13 +61,6 @@ Use the following format to return the result:
 
 Final Answer: [tool's result]
                                             
-
-If you are not able to answer the question using a tool, then use this format:
-```
-Thought: Do I need to use a tool? No
-Final Answer: I am only made to answer questions pertaining to information on annual and quarterly forms. 
-```
-
 Begin!
 
 Previous conversation history:
