@@ -10,7 +10,7 @@ from langchain_core.runnables.history import RunnableWithMessageHistory
 from langchain import hub
 from utils import get_session_id
 
-from tools.vector import get_movie_plot
+#from tools.vector import get_movie_plot
 from tools.cypher import cypher_qa
 
 chat_prompt = ChatPromptTemplate.from_messages(
@@ -24,13 +24,8 @@ movie_chat = chat_prompt | llm | StrOutputParser()
 
 tools = [
     Tool.from_function(
-        name="Movie Plot Search",  
-        description="For when you need to find information about movies based on a plot",
-        func=get_movie_plot, 
-    ),
-    Tool.from_function(
-        name="Movie information",
-        description="Provide information about movies questions using Cypher",
+        name="Financial information",
+        description="Provide information about companies financial statements",
         func = cypher_qa
     )
 ]
@@ -60,10 +55,17 @@ Action Input: the input to the action
 Observation: the result of the action
 ```
 
+If you are able to answer the question using a tool, then output the final answer directly from the tool's result. There is no need for further actions.
+
+Use the following format to return the result:
+
+Final Answer: [tool's result]
+                                            
+
 If you are not able to answer the question using a tool, then use this format:
 ```
 Thought: Do I need to use a tool? No
-Final Answer: I am only made to answer questions pertaining to information on annual and quarterly forms 
+Final Answer: I am only made to answer questions pertaining to information on annual and quarterly forms. 
 ```
 
 Begin!
