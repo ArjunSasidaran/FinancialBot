@@ -1,31 +1,19 @@
 import streamlit as st
 from utils import write_message
-# tag::import_agent[]
 from agent import generate_response
-# end::import_agent[]
 
-# tag::setup[]
 # Page Config
 st.set_page_config("FinancialBot", page_icon=":bar_chart:")
-# end::setup[]
+st.title("FinancialBot")
 
-# tag::session[]
 # Set up Session State
 if "messages" not in st.session_state:
     st.session_state.messages = [
-        {"role": "assistant", "content": "Hi, I'm a Financial Expert! How can I help you?"},
+        {"role": "assistant", "content": "Hi, I'm a Financial Expert specialized in answering questions from companies' 10-K forms! How can I assist you today?"},
     ]
-# end::session[]
 
-# tag::submit[]
 # Submit handler
 def handle_submit(message):
-    """
-    Submit handler:
-
-    You will modify this method to talk with an LLM and provide
-    context using data from Neo4j.
-    """
 
     # Handle the response
     with st.spinner('Thinking...'):
@@ -33,11 +21,6 @@ def handle_submit(message):
         response = generate_response(message)
         write_message('assistant', response)
         
-# end::submit[]
-
-
-# tag::chat[]
-# Display messages in Session State
 for message in st.session_state.messages:
     write_message(message['role'], message['content'], save=False)
 
@@ -48,4 +31,3 @@ if prompt := st.chat_input("What is up?"):
 
     # Generate a response
     handle_submit(prompt)
-# end::chat[]
