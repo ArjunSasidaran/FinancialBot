@@ -3,10 +3,10 @@
 Financial Bot is an advanced chatbot designed to assist users in retrieving and analyzing financial data. Leveraging cutting-edge technologies like Streamlit, LangChain, Neo4j, and the OpenAI API, this bot provides real-time financial insights with an interactive interface. It is specifically tailored to extract data from companies' 10K forms, offering users detailed financial metrics and insights.
 
 ## Features
-Query Financial Information: Retrieve detailed financial metrics, such as net income, gross margin, and more, extracted directly from companies' 10K forms.
-Real-Time Data Retrieval: Access up-to-date financial data from trusted sources.
-Interactive Interface: Easy-to-use chat interface built with Streamlit.
-Secure Configuration: Utilizes a secrets.toml file to securely store API keys and other sensitive information.
+- Query Financial Information: Retrieve detailed financial metrics, such as net income, gross margin, and more, extracted directly from companies' 10K forms.
+- Real-Time Data Retrieval: Access up-to-date financial data from trusted sources.
+- Interactive Interface: Easy-to-use chat interface built with Streamlit.
+- Secure Configuration: Utilizes a secrets.toml file to securely store API keys and other sensitive information.
 
 ## Technologies Used
 - Streamlit: For building the interactive user interface.
